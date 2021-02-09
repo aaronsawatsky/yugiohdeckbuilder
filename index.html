@@ -19,10 +19,10 @@
         <!-- <p class="deck-title">Deck 1</p> -->
     </div>
     <div class="search-bar">
-        <img class="search-img" src="/kisspng-yu-gi-oh-trading-card-game-magic-the-gathering-c-boardwalk-clipart-team-game-2541521-5b6c40d11bc2a3.8093505015338211371137.png" alt="">
+        <img class="search-img" src="/YuGiOh App/kisspng-yu-gi-oh-trading-card-game-magic-the-gathering-c-boardwalk-clipart-team-game-2541521-5b6c40d11bc2a3.8093505015338211371137.png" alt="">
         <form action="" class="search">
             <fieldset>
-                <input type="text" class="input" placeholder="Search...">
+                <input type="text" class="input" placeholder="Search..." required>
             </fieldset>
         </form>
         <!-- <div class="options">
@@ -33,11 +33,53 @@
             <input type="checkbox" name="skill">
         </div> -->
         <button class="open-tray">Open Deck</button>
+        <button class="open-filter-tray">Options</button>
     </div>
-    <!-- <div class="filters">
-        <label for="spell-cards">Spell Cards</label>
-        <input type="checkbox" class="spell-cards" id="spell-cards" name="spell-cards" value="spell-cards">
-    </div> -->
+    <nav class="mobile-search-bar">
+        <div class="sliders">
+            <i class="fas fa-sliders-h"></i>
+        </div>
+        <div class="mobile-search-img">
+            <img src="/YuGiOh App/kisspng-yu-gi-oh-trading-card-game-magic-the-gathering-c-boardwalk-clipart-team-game-2541521-5b6c40d11bc2a3.8093505015338211371137.png" alt="" class="search-img">
+        </div>
+        <div class="search-and-deck">
+            <i class="fas fa-search"></i>
+            <i class="fas fa-th"></i>
+        </div>
+    </nav>
+    <div class="filter-tray">
+        <div class="filter-tray-header">
+            <button class="filter-tray-button">Close</button>
+        </div>
+        <div class="filters">
+            <h1 class="filter-tray-header-label">Filter By Type</h1>
+            <div class="filter-option">
+                <input type="radio" class="spell-cards" id="Spell" name="card-types" value="spell-cards">
+                <label for="spell-cards">Spell Cards</label>
+            </div>
+            <div class="filter-option">
+                <input type="radio" class="trap-cards" id="Trap" name="card-types" value="trap-cards">
+                <label for="trap-cards">Trap Cards</label>
+            </div>
+            <div class="filter-option">
+                <input type="radio" class="monster-cards" id="Monster" name="card-types" value="monster-cards">
+                <label for="monster-cards">Monster Cards</label>
+            </div>
+            <div class="filter-option">
+                <input type="radio" class="skill-cards" id="Skill" name="card-types" value="skill-cards">
+                <label for="skill-cards">Skill Cards</label>
+            </div>
+            <div class="filter-option">
+                <input type="radio" class="token-cards" id="Token" name="card-types" value="token-cards">
+                <label for="token-cards">Token Cards</label>
+            </div>
+            <div class="filter-option">
+                <input type="radio" class="none" id="None" name="card-types" value="none">
+                <label for="none">REMOVE FILTER</label>
+            </div>
+
+        </div>
+    </div>
     <div class="container">
         <!-- <div class="search-results">
             <h1 class="name">MONSTER</h1>
