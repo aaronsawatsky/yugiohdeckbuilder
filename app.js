@@ -9,6 +9,7 @@ const container = document.querySelector('.container');
 const filter = document.querySelector('.filter-by-price');
 const searchBar = document.querySelector('.search-bar');
 const searchImg = document.querySelector('.search-img');
+const mobileSearchImg = document.querySelector('.mobile-search-img');
 const openTray = document.querySelector('.open-tray');
 const deckTray = document.querySelector('.deck-tray');
 const deckBody = document.querySelector('.deck-body');
@@ -26,10 +27,13 @@ let results = [];
 let filteredResults = [];
 let userDeck = [];
 
-searchImg.addEventListener('click', () => {
+const reloadPage = () => {
     window.location.reload();
-})
+    return false;
+}
 
+searchImg.addEventListener('click', reloadPage);
+mobileSearchImg.addEventListener('click', reloadPage);
 
 const getCards = async() => {
     const response = await fetch(dataBase);
@@ -58,7 +62,6 @@ getCards() // Connect to API and get all the cards
         // })
 
         // clear container and replace "results" with the filtered results
-
 
         // Filling the DOM when submitting a search
         const filterContainer = toBeFiltered => {
