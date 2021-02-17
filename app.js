@@ -21,8 +21,14 @@ const filterTray = document.querySelector('.filter-tray');
 const filterTrayButton = document.querySelector('.filter-tray-button');
 const filters = document.querySelector('.filters');
 const checkBoxElems = document.querySelectorAll("input[type='radio']");
+const selectElems = document.querySelectorAll('select');
+const priceSort = document.getElementById('Price');
+const atkSort = document.getElementById('Atk');
+const defSort = document.getElementById('Def');
+const levelSort = document.getElementById('Level');
 const openFilterTray = document.querySelector('.open-filter-tray');
 const allCards = [];
+const footer = document.querySelector('footer');
 let results = [];
 let filteredResults = [];
 let userDeck = [];
@@ -56,12 +62,6 @@ getCards() // Connect to API and get all the cards
            results = allCards.filter(card => card.name.includes(term));
            return results;
         }
-
-        // filter.addEventListener('click', () => {
-        //    results = allCards.sort((a, b) => parseFloat(b.card_prices[0].cardmarket_price) - parseFloat(a.card_prices[0].cardmarket_price))
-        // })
-
-        // clear container and replace "results" with the filtered results
 
         // Filling the DOM when submitting a search
         const filterContainer = toBeFiltered => {
@@ -153,16 +153,14 @@ getCards() // Connect to API and get all the cards
             })
         }
 
-        let checkNum = 0;
         const filterByType = (e) => {
             if (e.target.id === "Spell") {
                 if (e.target.checked) {
-                    checkNum++;
                     container.innerHTML = '';
-                    let filteredResults = results.filter(result => result.type.includes("Spell"));
+                    filteredResults = results.filter(result => result.type.includes("Spell"));
                     filterContainer(filteredResults);
                 } else {
-                    checkNum--;
+                    filteredResults = [];
                     container.innerHTML = '';
                     filterContainer(results);
                 }
@@ -171,41 +169,82 @@ getCards() // Connect to API and get all the cards
                 if (e.target.checked) {
                     checkNum++;
                     container.innerHTML = '';
-                    let filteredResults = results.filter(result => result.type.includes("Trap"));
+                    filteredResults = results.filter(result => result.type.includes("Trap"));
                     filterContainer(filteredResults);
                 } else {
-                    checkNum--;
+                    filteredResults = [];
                     container.innerHTML = '';
                     filterContainer(results);
                 }
             }
             if (e.target.id === "Monster") {
                 if (e.target.checked) {
-                    checkNum++;
                     container.innerHTML = '';
-                    let filteredResults = results.filter(result => result.type.includes("Monster"));
+                    filteredResults = results.filter(result => result.type.includes("Monster"));
                     filterContainer(filteredResults);  
                 } else {
-                    checkNum--;
+                    filteredResults = [];
                     container.innerHTML = ''
                     filterContainer(results);
                 }
             }
             if (e.target.id === "None") {
                 if (e.target.checked) {
+                    filteredResults = [];
                     container.innerHTML = '';
                     filterContainer(results);
                 }
             }
-            // for (let i = 0; i < checkBoxElems.length; i++) {
-            //     if (checkBoxElems[i].checked) {
-            //         checkBoxElems[i].checked = false;
-            //     }
-            // }
         }
+
         for (let i = 0; i < checkBoxElems.length; i++) {
             checkBoxElems[i].addEventListener('click', filterByType);
         }
+
+        for (let i = 0; i < selectElems.length; i++) {
+            selectElems[i].addEventListener('click', () => {
+                // selectElems[i].selectedIndex = 0;
+            })
+        }
+
+        const priceSortFunctionDescending = (arrayToBeSorted) => {
+            container.innerHTML = '';
+            let sortedResults = arrayToBeSorted.sort((a, b) => parseFloat(b.card_prices[0].cardmarket_price) - parseFloat(a.card_prices[0].cardmarket_price));
+            filterContainer(sortedResults);
+        }
+
+        const priceSortFunctionAscending = (arrayToBeSorted) => {
+            container.innerHTML = '';
+            let sortedResults = arrayToBeSorted.sort((a, b) => parseFloat(a.card_prices[0].cardmarket_price) - parseFloat(b.card_prices[0].cardmarket_price));
+            filterContainer(sortedResults);
+        }
+
+        priceSort.addEventListener('change', () => {
+            if (filteredResults.length !== -1) {
+                if (priceSort.value === 'price-high-to-low') {
+                    priceSortFunctionDescending(filteredResults);
+                }
+                if (priceSort.value === 'price-low-to-high') {
+                    priceSortFunctionAscending(filteredResults);
+                }
+                if (priceSort.value === 'none') {
+                    container.innerHTML = '';
+                    filterContainer(results);
+                }
+            }
+            if (filteredResults.length === 0) {
+                if (priceSort.value === 'price-high-to-low') {
+                    priceSortFunctionDescending(results);
+                }
+                if (priceSort.value === 'price-low-to-high') {
+                    priceSortFunctionAscending(results);
+                }
+                if (priceSort.value === 'none') {
+                    container.innerHTML = '';
+                    filterContainer(results);
+                }
+            }
+        })
 
         // What happens when a search is submitted 
         searchForm.addEventListener('submit', e => {
@@ -213,14 +252,15 @@ getCards() // Connect to API and get all the cards
             var declaration = document.styleSheets[0].rules[3].style;
             var oldValue = declaration.removeProperty('top');
             var oldValue = declaration.removeProperty('left');
-            var oldValue = declaration.removeProperty('position');
+            // var oldValue = declaration.removeProperty('position');
             var oldValue = declaration.removeProperty('flex-direction');
             var oldValue = declaration.removeProperty('transform');
             var declaration1 = document.styleSheets[0].rules[53].style;
             var oldValue = declaration1.removeProperty('display');
             var declaration3 = document.styleSheets[0].rules[68].style;
             var oldValue = declaration3.removeProperty('display');
-            console.log(document.styleSheets[0].rules);
+            searchBar.style.backgroundColor = 'rgb(236, 236, 236)';
+            footer.classList.remove('hidden');
             searchImg.style.height = '100px';
             searchImg.style.width = '150px';
             if (window.screen.width < 750) {
@@ -228,6 +268,7 @@ getCards() // Connect to API and get all the cards
                 searchImg.style.width = '100px';
                 searchBar.style.display = 'none';
                 mobileNavBar.style.display = 'inline-flex';
+                container.style.padding=top = 0;
             }
             container.innerHTML = '';
             const searchItem = input.value.toLowerCase();
