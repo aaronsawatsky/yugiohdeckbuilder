@@ -29,7 +29,9 @@ html {
     left: 50%;
     position: fixed;
     transform: translateX(-50%); 
+    z-index: 99;
     /* display: none; */
+    /* background-color: rgb(236, 236, 236); */
     
 }
 
@@ -145,6 +147,7 @@ fieldset {
     display: flex;
     flex-direction: column;
     margin: 0 auto;
+    padding-top: 100px;
 }
 
 .search-results {
@@ -345,6 +348,7 @@ img {
     display: flex;
     background-color: white;
     justify-content: left;
+    
 }
 
 .filter-tray-button {
@@ -575,9 +579,66 @@ img {
     margin: 0px 10px;
 }
 
-.filter-tray-header-label {
+.filter-tray-header-label, .filter-tray-header-label-sort-by {
     font-size: 30px;
     text-align: left;
     margin-top: 10px;
     margin-left: 10px;
+}
+
+.sort-by-options {
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    padding: 10px;
+}
+
+.sort-by-options > select {
+    margin: 5px 0px;
+    /* border: 1px solid black; */
+    outline: none;
+    height: 40px;
+    font-family: Yugioh;
+    border-radius: 15px;
+    padding: 5px;
+}
+
+footer, .push {
+    width: 100%;
+    height: 100%;
+    background-color:rgb(122, 120, 172);
+    text-align: center;
+    font-family: Yugioh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: white;
+    /* position: fixed; */
+    /* position: fixed;
+    bottom: 0; */
+}
+
+footer > div > a > i {
+    padding: 0px 10px;
+    padding-bottom: 20px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: 0.5s;
+    color: white;
+}
+
+footer > div > a > i:hover {
+    color: #b3cbf3;
+    transform: translateY(-5px);
+}
+
+footer > p {
+    font-size: 12px;
+}
+
+.flex-container {
+    display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  justify-content: space-between
 }
