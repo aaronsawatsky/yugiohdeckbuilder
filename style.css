@@ -30,9 +30,17 @@ html {
     position: fixed;
     transform: translateX(-50%); 
     z-index: 99;
+    opacity: 0;
+    transition: 1s;
     /* display: none; */
     /* background-color: rgb(236, 236, 236); */
-    
+}
+
+.search-bar > p {
+    font-size: 15px;
+    letter-spacing: 5px;
+    opacity: 0;
+    transition: 1s;
 }
 
 .deck {
@@ -82,6 +90,7 @@ html {
     max-height: 200px;
     padding-left: 30px;
     padding-right: 30px;
+    cursor: pointer;
 }
 
 input:focus {
@@ -331,7 +340,7 @@ img {
 }
 
 .filter-tray {
-    background-color: rgb(250, 250, 250, 0.9);
+    background-color: rgb(250, 250, 250, 1);
     height: 100%;
     width: 0px;
     z-index: 999;
@@ -459,7 +468,7 @@ img {
 }
 
 .deck-tray {
-    background-color:rgb(250, 250, 250, 0.9);
+    background-color:rgb(250, 250, 250, 1);
     height: 100%;
     width: 0px;
     z-index: 999;
