@@ -350,7 +350,7 @@ img {
     right: left;
     transition: 1s ease;
     overflow-y: scroll;
-    overflow-x: none;
+    overflow-x: hidden;
 }
 
 .filter-tray-header {
