@@ -29,14 +29,25 @@ const levelSort = document.getElementById('Level');
 const openFilterTray = document.querySelector('.open-filter-tray');
 const allCards = [];
 const footer = document.querySelector('footer');
+const searchBarP = document.querySelector('.search-bar-p');
 let results = [];
 let filteredResults = [];
 let userDeck = [];
+let filterTrayToggle = false;
 
 const reloadPage = () => {
     window.location.reload();
     return false;
 }
+
+window.onload = () => {
+    searchBar.style.opacity = 1;
+    setTimeout(() => {
+        searchBarP.style.opacity = 1;
+    }, 800);
+
+}
+
 
 searchImg.addEventListener('click', reloadPage);
 mobileSearchImg.addEventListener('click', reloadPage);
@@ -207,13 +218,15 @@ getCards() // Connect to API and get all the cards
             })
         }
 
-        const priceSortFunctionDescending = (arrayToBeSorted) => {
+
+        // Price Sorting 
+        const priceSortFunctionDescending = arrayToBeSorted => {
             container.innerHTML = '';
             let sortedResults = arrayToBeSorted.sort((a, b) => parseFloat(b.card_prices[0].cardmarket_price) - parseFloat(a.card_prices[0].cardmarket_price));
             filterContainer(sortedResults);
         }
 
-        const priceSortFunctionAscending = (arrayToBeSorted) => {
+        const priceSortFunctionAscending = arrayToBeSorted => {
             container.innerHTML = '';
             let sortedResults = arrayToBeSorted.sort((a, b) => parseFloat(a.card_prices[0].cardmarket_price) - parseFloat(b.card_prices[0].cardmarket_price));
             filterContainer(sortedResults);
@@ -246,12 +259,148 @@ getCards() // Connect to API and get all the cards
             }
         })
 
+        // Atk Sorting
+        const atkSortFunctionDescending = arrayToBeSorted => {
+            container.innerHTML = '';
+            let sortedResults = arrayToBeSorted.sort((a, b) => b.atk - a.atk);
+            filterContainer(sortedResults);
+        }
+
+        const atkSortFunctionAscending = arrayToBeSorted => {
+            container.innerHTML = '';
+            let sortedResults = arrayToBeSorted.sort((a, b) => a.atk - b.atk);
+            filterContainer(sortedResults);
+        }
+
+        atkSort.addEventListener('change', () => {
+            if (filteredResults.length !== -1) {
+                if (atkSort.value === 'atk-high-to-low') {
+                    atkSortFunctionDescending(filteredResults);
+                }
+                if (atkSort.value === 'atk-low-to-high') {
+                    atkSortFunctionAscending(filteredResults);
+                }
+                if (atkSort.value === 'none') {
+                    container.innerHTML = '';
+                    const searchItem = input.value.toLowerCase();
+                    filterResults(searchItem);
+                    filterContainer(results);
+
+                }
+            }
+            if (filteredResults.length === 0) {
+                if (atkSort.value === 'def-high-to-low') {
+                    atkSortFunctionDescending(results);
+                }
+                if (atkSort.value === 'def-low-to-high') {
+                    atkSortFunctionAscending(results);
+                }
+                if (atkSort.value === 'none') {
+                    container.innerHTML = '';
+                    const searchItem = input.value.toLowerCase();
+                    filterResults(searchItem);
+                    filterContainer(results);
+                } 
+            }
+        })
+
+        // Def Sorting
+        const defSortFunctionDescending = arrayToBeSorted => {
+            container.innerHTML = '';
+            let sortedResults = arrayToBeSorted.sort((a, b) => b.def - a.def);
+            filterContainer(sortedResults);
+        }
+
+        const defSortFunctionAscending = arrayToBeSorted => {
+            container.innerHTML = '';
+            let sortedResults = arrayToBeSorted.sort((a, b) => b.def - a.def);
+            filterContainer(sortedResults);
+        }
+
+        defSort.addEventListener('change', () => {
+            if (filteredResults.length !== -1) {
+                if (defSort.value === 'def-high-to-low') {
+                    defSortFunctionDescending(filteredResults);
+                }
+                if (defSort.value === 'def-low-to-high') {
+                    defSortFunctionAscending(filteredResults);
+                }
+                if (defSort.value === 'none') {
+                    container.innerHTML = '';
+                    const searchItem = input.value.toLowerCase();
+                    filterResults(searchItem);
+                    filterContainer(results);
+
+                }
+            }
+            if (filteredResults.length === 0) {
+                if (defSort.value === 'def-high-to-low') {
+                    defSortFunctionDescending(results);
+                }
+                if (defSort.value === 'def-low-to-high') {
+                    defSortFunctionAscending(results);
+                }
+                if (defSort.value === 'none') {
+                    container.innerHTML = '';
+                    const searchItem = input.value.toLowerCase();
+                    filterResults(searchItem);
+                    filterContainer(results);
+                } 
+            }
+        })
+
+        // Level Sorting
+        const levelSortFunctionDescending = arrayToBeSorted => {
+            container.innerHTML = '';
+            let sortedResults = arrayToBeSorted.sort((a, b) => b.level - a.level);
+            filterContainer(sortedResults); 
+        }
+
+        const levelSortFunctionAscending = arrayToBeSorted => {
+            container.innerHTML = '';
+            let sortedResults = arrayToBeSorted.sort((a, b) => a.level - b.level);
+            filterContainer(sortedResults); 
+        }
+
+        levelSort.addEventListener('change', () => {
+            if (filteredResults.length !== -1) {
+                if (levelSort.value === 'level-high-to-low') {
+                    levelSortFunctionDescending(filteredResults);
+                }
+                if (levelSort.value === 'level-low-to-high') {
+                    levelSortFunctionAscending(filteredResults);
+                }
+                if (levelSort.value === 'none') {
+                    container.innerHTML = '';
+                    const searchItem = input.value.toLowerCase();
+                    filterResults(searchItem);
+                    filterContainer(results);
+
+                }
+            }
+            if (filteredResults.length === 0) {
+                if (levelSort.value === 'level-high-to-low') {
+                    levelSortFunctionDescending(results);
+                }
+                if (levelSort.value === 'level-low-to-high') {
+                    levelSortFunctionAscending(results);
+                }
+                if (levelSort.value === 'none') {
+                    container.innerHTML = '';
+                    const searchItem = input.value.toLowerCase();
+                    filterResults(searchItem);
+                    filterContainer(results);
+                } 
+            }
+        })
+
         // What happens when a search is submitted 
         searchForm.addEventListener('submit', e => {
             e.preventDefault();
             var declaration = document.styleSheets[0].rules[3].style;
             var oldValue = declaration.removeProperty('top');
             var oldValue = declaration.removeProperty('left');
+            var oldValue = declaration.removeProperty('transition');
             // var oldValue = declaration.removeProperty('position');
             var oldValue = declaration.removeProperty('flex-direction');
             var oldValue = declaration.removeProperty('transform');
@@ -263,6 +412,9 @@ getCards() // Connect to API and get all the cards
             footer.classList.remove('hidden');
             searchImg.style.height = '100px';
             searchImg.style.width = '150px';
+            searchBarP.style.display = 'none';
+            openTray.style.display = 'initial';
+            openFilterTray.style.display = 'initial';
             if (window.screen.width < 750) {
                 searchImg.style.height = '70px';
                 searchImg.style.width = '100px';
@@ -447,21 +599,23 @@ getCards() // Connect to API and get all the cards
 
             if (e.target.classList.contains('fa-sliders-h')) {
                 if (!filterTrayToggle) {
+                    filterTrayToggle = true;
                     filterTray.style.width = '450px';
                     if (window.screen.width < 750) {
-                        filterTray.style.width = '100%';
+                        filterTray.style.width = '75%';
                     }
-                    filterTrayToggle = true;
                     setTimeout(() => {
                         filters.style.opacity = 1;
                     }, 600)
+                } else {
+                    console.log(filterTrayToggle);
                 }
             }
             if (e.target.classList.contains('open-filter-tray')) {
                 if (!filterTrayToggle) {
                     filterTray.style.width = '450px';
                     if (window.screen.width < 750) {
-                        filterTray.style.width = '100%';
+                        filterTray.style.width = '75%';
                     }
                     filterTrayToggle = true;
                     setTimeout(() => {
@@ -477,8 +631,6 @@ getCards() // Connect to API and get all the cards
                 }
             }
         })
-
-        let filterTrayToggle = false;
 
         // Creating a search function for mobile
         let mobileSearchInputToggle = false;
