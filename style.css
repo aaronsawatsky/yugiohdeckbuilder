@@ -465,6 +465,7 @@ img {
     background-color:#4285F4;
     color: white;
     border-radius: 15px;
+    z-index: 99;
 }
 
 .deck-tray {
