@@ -2,11 +2,6 @@
     font-family: Yugioh;
     src: url(Stone\ Serif\ Semibold.ttf);
 }
-
-input, textarea, select {
-    font-size: 16px;
-  }
-
 body {
     background-color: rgb(243, 243, 243);
     margin: 0;
@@ -119,6 +114,7 @@ input {
     font-family: Yugioh; 
     height: 40px;
     border: 1px solid white;
+    font-size: 16px;
 }
 
 .input {
@@ -615,6 +611,7 @@ img {
     font-family: Yugioh;
     border-radius: 15px;
     padding: 5px;
+    font-size: 16px;
 }
 
 footer, .push {
