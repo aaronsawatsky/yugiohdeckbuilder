@@ -1,5 +1,5 @@
 const dataBase = 'https://db.ygoprodeck.com/api/v7/cardinfo.php';
-const cardImages = 'https://storage.googleapis.com/ygoprodeck.com/pics/';
+const cardImages = 'https://images.ygoprodeck.com/images/cards/';
 const cardBox = document.querySelector('.card-box');
 const input = document.querySelector('.input');
 const searchForm = document.querySelector('.search');
